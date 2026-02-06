@@ -54,7 +54,8 @@ pstree
 ```
 ![alt text](image-5.png)
 
-# process tree with parent id, every process has a parent and pid 1 is the init system(systemmd on linux)
+## Process tree with parent id ##
+** Every process has a parent and pid 1 is the init system(systemmd on linux)
 ```bash
 pstree -p
 ```
@@ -66,3 +67,61 @@ pstree -p
 
 ---
 ## Real time CPU Monitoring with top
+```bash
+top
+```
+![alt text](image-9.png)
+
+```bash
+htop -u ec2-user
+```
+
+![alt text](image-10.png)
+
+## Finding CPU hogs
+```bash
+# Top 4 CPU consumers
+ps aux --sort=-%cpu | head -5
+```
+![alt text](image-11.png)
+
+```bash
+#continously monitor top cpu user
+watch -n 1 'ps aux --sort=-%cpu | head'
+ps -eo pid --sort=-%cpu | head -4
+ps -eo %mem --sort=-%cpu | head
+```
+
+![alt text](image-12.png)
+![alt text](image-13.png)
+
+##Load Average
+```bash
+uptime
+nproc
+lscpu
+```
+![alt text](image-14.png)
+![alt text](image-15.png)
+![alt text](image-16.png)
+
+## Generating CPU Load for Testing
+** Excercise 1
+```bash
+stress-ng --cpu 1 --timeout 30s
+```
+![alt text](image-18.png)
+![alt text](image-17.png)
+
+**Excercise 2
+```bash
+# Terminal 1
+stress-ng --cpu 2 --timeout 120s
+# Terminal 2
+uptime
+```
+** Terminal 1 output 
+![alt text](image-21.png)
+** Terminal 2 output
+![alt text](image-19.png)
+![alt text](image-20.png)
